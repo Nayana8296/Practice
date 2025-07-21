@@ -1,0 +1,34 @@
+
+ class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Cat meows");
+    }
+}
+class Elephant extends Animal {
+    void trumpet() {
+        System.out.println("Elephant trumpet");
+    }
+}
+public class Main {
+    public static void main(String [] args){
+        Cat c = new Cat();
+        Elephant E = new Elephant();
+        c.sound();
+        c.meow();
+        E.sound();
+        E.trumpet();
+
+    }
+}
+
+
+O/p:
+Animal makes sound
+Cat meows
+Animal makes sound
+Elephant trumpet

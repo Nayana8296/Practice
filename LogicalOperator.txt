@@ -1,0 +1,16 @@
+
+class Main {
+    public static void main(String[] args) {
+        int a=10; int b=20;
+        
+        
+        System.out.println("Logical And Result: "+((a>10)&&(b<20)));
+        System.out.println("Logical OR Operator: " +((a>10)||b>10));
+        System.out.println("Logical Not result: "+!(a>b));
+        
+    }
+}
+
+Output:Logical And Result: false
+Logical OR Operator: true
+Logical Not result: true

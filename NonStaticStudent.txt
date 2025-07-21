@@ -1,0 +1,22 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class NonStaticStudent {
+     int StudentCount =6;
+    
+     void Totalstudent(){
+        System.out.println("This is non static method");
+        System.out.println("studentCount:"+StudentCount);
+     }
+    public static void main(String[] args)
+    {
+         
+        NonStaticStudent s1 = new NonStaticStudent();
+        s1.Totalstudent();
+        
+    
+    }
+}
+
+This is non static method
+studentCount:6

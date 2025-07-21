@@ -1,0 +1,26 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        String color="yellow";
+        
+        switch (color) {
+            case "red":
+           System.out.println("stop");
+           break;
+           
+          case "yellow":
+          System.out.println("ready to go");
+          break;
+          
+          case "green":
+              System.out.println("Go");
+              break;
+              default :
+              System.out.println("unknown color");
+        }
+    }
+}
+    
+ O/p:  ready to go;

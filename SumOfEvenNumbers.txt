@@ -1,0 +1,24 @@
+Sum of Even numbers:
+
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter the limit");
+        int limit = scanner.nextInt();
+        int sum=0;
+        
+        for(int i=1; i<=limit; i++){
+        if(i%2==0)
+        {
+            sum=sum+i;
+            System.out.println(i);
+        }
+        }
+        System.out.println("The sum of "+limit+" even number "+ sum);
+        
+    }
+    }
+        
+        
+        

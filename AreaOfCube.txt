@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+
+class  circle {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter size of side :");
+         double a = scanner.nextDouble();
+        //System.out.println("Enter the length:");
+       // int l = scanner.nextInt();
+        
+         double areaofCube =6*a*a;
+        
+        System.out.println("areaOfCube"+areaofCube);              
+    }
+}

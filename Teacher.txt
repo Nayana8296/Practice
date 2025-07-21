@@ -1,0 +1,24 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Teacher {
+     static int totalteacher =7;
+    
+     static void tutionteacher (){
+    
+        System.out.println("Total teacher:"+Teacher.totalteacher);
+    
+     }
+    public static void main(String[] args)
+    {
+         System.out.println("This is static method:");
+       Teacher.tutionteacher();
+        
+    
+    }
+}
+
+This is static method:
+Total teacher:7
+
+=== Code Execution Successful ===

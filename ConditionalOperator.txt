@@ -1,0 +1,17 @@
+public class main{
+
+public static ovid main(String [] args)
+{
+     int i=20;
+  boolean isEven=i%2==0;
+ 
+if(isEven){
+System.out.println("even");
+}
+
+else
+{
+System.out.println("Odd");
+}
+}
+}

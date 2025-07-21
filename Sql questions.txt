@@ -1,0 +1,21 @@
+✅ Basic Level
+Display all records from the Employees table.
+
+Find names of employees in the IT department.
+
+List employees with salary greater than 40000.
+
+Get the total number of employees.
+
+Show all customers who are from Mumbai.
+
+✅ Intermediate Level
+Display the names of employees who joined after 2020.
+
+Get the average salary of employees in the HR department.
+
+Find customers who placed more than one order.
+
+List the total number of orders per customer.
+
+Display the highest salary in each department.

@@ -1,0 +1,48 @@
+
+
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+       
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Enter a number num");
+       int num=scanner.nextInt();
+       System.out.println("Enter a number num1");
+       int num1=scanner.nextInt();
+       System.out.println("Enter a number num2");
+       int num2 = scanner.nextInt();
+       
+       int sum;
+       int substraction;
+       int multiplication;
+       int division;
+       int percentile;
+     
+       sum=num+num1+num2;
+      System.out.println("sum:"+sum);
+      
+      substraction = num-num1-num2;
+      System.out.println("substraction"+substraction);
+      
+      multiplication = num*num1*num2;
+      System.out.println("multiplication:"+multiplication);
+      
+      division = num/num1/num2;
+      System.out.println("division:"+division);
+      
+      percentile = num%num1%num2;
+      System.out.println("percentile:"+percentile);
+      
+      for(int i=0; i<num1; i++)
+      {
+          System.out.println(i);
+      }
+      for(int i=0; i>num2; i--)
+      {
+          System.out.println(i);
+      }
+      }
+    }
+}
+        
+     

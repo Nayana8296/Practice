@@ -1,0 +1,137 @@
+
+Docker Installation Video
+===============================
+https://youtu.be/5wOQlEsVPe0?si=FaCBLRMtKf-PqMbv
+
+Jenkins Installation Video
+==============================
+https://youtu.be/zg85zMjcYFs?si=TKG18dLYjMfNeu2I
+
+
+What is Git?
+-----------------
+Git is version control system(software)
+Git is install locally on local machine
+Git will help you to store script and maintain versions
+Git always provides command line interface support
+
+
+What is Github?
+--------------------
+Github is cloud based remote service
+Hosted on web
+
+Steps
+========
+1.Install gitbash on local machine
+2.register on Github
+3.Create a repository
+
+
+
+Steps Using Git bash
+========================
+
+1.Open git bash from working directory
+
+2. Do some config global setup
+$ git config --global user.name "username"
+$ git config --global user.email "emailid"
+
+3. To setup new main as default branch(optional)
+$ git config --global init.default branch main
+
+4.Initialize empty repository
+$ git init
+
+
+
+5. To add files to stage
+ git add .
+
+6. To remove added files from git stage
+
+$ git rm --cached filename
+
+7. To create branch
+git branch name
+
+8. to switch to new branch
+git switch branchname
+
+7. To marge branch to master/main from sub --> first come to master and then write command
+$ git merge -m "merge message " branchname to merge
+
+8.To delete branch
+git branch -d branchname
+
+9.To check differnce between files after update
+git diff
+
+
+=====================================================
+
+Steps using Cmd
+================
+
+1.Initialization 
+git init
+
+2.add project to remote repository
+git remote add origin urlof repository
+
+3.To add project to stage area
+git add .
+
+4.To check status 
+git status
+
+5.To add project to local repository 
+git commit -m "First commit"
+
+6.To push code on remote repository 
+git push origin master
+
+===============================================
+
+To create connection between git local and remote using ssh key 
+=================================================================
+To generate key
+ssh-keygen -o
+
+key from path add to github 
+
+===========================================
+
+Git with branches
+
+===================
+To check the branch
+git branch
+
+To create new branch
+git branch branchname
+
+To switch specific branch
+git checkout branchname
+
+To push local branch to remote
+git push -u origin newbranch
+
+
+To add branch to master from git hub call mearge and pull request
+
+
+======================================================
+Eclipse and Github connection using ssh
+=======================================
+1.copy ssh path from github
+
+2.In eclipse import --->git--->git project--->clone uri--->
+and next-->finish
+
+3. from team use command either commit and push or pull
+
+
+
+

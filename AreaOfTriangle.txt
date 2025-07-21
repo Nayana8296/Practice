@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+
+class AreaOfTriangle {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the breadth:");
+        double b = scanner.nextDouble();
+        System.out.println("Enter the height:");
+        double h = scanner.nextDouble();
+        
+        double areaOfTriangle =.5*b*h;
+        
+        System.out.println("area of Triangle"+areaOfTriangle);              
+    }
+}

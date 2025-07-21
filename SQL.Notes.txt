@@ -1,0 +1,1027 @@
+/*
+Create a database
+WE ARE CREATING A STORAGE
+*/
+CREATE DATABASE TEST123;
+
+-- to delete/drop any database
+	DROP DATABASE TEST123;
+    
+--  all databases available
+SHOW DATABASES;
+/*
+IF EXISTS
+IF NOT EXISTS
+*/
+
+-- if database is not exist then i would like to create
+
+CREATE DATABASE IF NOT EXISTS SA2019;
+
+CREATE DATABASE IF NOT EXISTS SA2020;
+
+-- if database is already created then delete the same
+
+DROP DATABASE IF EXISTS SA2020;
+
+--  use database for data handling
+ USE SA2019;
+ 
+ 
+ -- to check number of tables
+ 
+ /*
+ 
+ sql statements
+ ==================
+ 1.DDL(data definition language)
+ ----------------------------
+ 1.create
+ 2.alter
+ 3.truncate- delete all rows from the table
+ 4.drop- delete entrier structure of a table from database
+ 
+ 2.DML(data manipulation language)
+ ----------------------------------
+ 1.insert
+ 2.update
+ 3.delete - single entry delete
+ 
+ 3.DCL (data control language -server)
+ -----------------------------------------
+ 1.grant -set the permission 
+ 2.revoke - delete the permission
+ 
+ 4.TCL(transaction control language)
+ -----------------------------------
+ 1.commit - save all the operation ointo database
+ 2.rollback- to undo the change 
+ 
+ 5.DQL (data query language)
+ -------------------------------
+  1.select
+  
+ */
+ 
+ /*Datatypes in MySQl
+ 1. numeric data (90,-7)------------->int
+ 2. decimal number (23.56,-98.77)----->float
+ 3. static text----------------------->char ex: char(4) |S|T|A|R|
+ 4. dynamic text---------------------->varchar
+ 5. hierdate--------------------------->date
+ 6. timestamp-------------------------->time
+ 
+ */
+ -- create a table into database DDL-create
+ 
+ CREATE TABLE STUDENT(SID INT,SNAME VARCHAR(15),ADDS VARCHAR(30));
+ 
+ -- confirm created table
+ SHOW TABLES;
+ 
+ -- to check description of a table
+  DESC STUDENT;
+ 
+ -- to create row in a table --DML-insert
+ INSERT INTO STUDENT VALUES(101,'SURAJ','PUNE');
+ 
+ -- to get the data from table DQL-select
+ /* to get all columns data - *
+ select * from tablename
+ to get one column data
+ select sid from tablename
+ */
+ -- to get all the cells data
+  SELECT * FROM STUDENT;
+ 
+-- to get only name
+SELECT SNAME FROM STUDENT;
+
+-- How to insert multiple rows at a time
+
+INSERT INTO STUDENT(SID,SNAME,ADDS)
+VALUES(102,'KIRAN','PUNE'),
+	(103,'SMITA','MUMBAI'),
+    (104,'GEETA','MUMBAI'),
+    (105,'AKASH','MUMBAI'); -- 4 ROWS AFFECTED
+    
+-- get all the rows from the table
+
+SELECT * FROM STUDENT;
+
+-- for filtering/ based on condition any record we use - where clause(rule/guidline)
+ -- SELECT RECORD WHOS ID IS 103
+ SELECT * FROM STUDENT
+ WHERE SID=103;
+ 
+ -- select name for id 105
+ SELECT SNAME FROM STUDENT
+ WHERE SID=105;
+ 
+ -- select all records from table where address is mumbai
+ SELECT * FROM STUDENT
+ WHERE ADDS='MUMBAI';
+ 
+ /*
+ To modify structure of a table we use alter
+ add a column : Add colname datatype;
+drop a column : drop column columnname
+change the column name: rename column currentname to newname
+change the datatype of column : modify col_name new_datatype
+change the name of table : rename to new_name
+
+ */
+ -- to add new column into student table- phno
+ ALTER TABLE STUDENT
+ ADD PHNO INT;
+ 
+SELECT * FROM STUDENT;
+
+DESC STUDENT;
+--  to change/modify datatype for column(phno int to long)
+ALTER TABLE STUDENT
+MODIFY PHNO LONG;
+-- to check description of a table
+DESC STUDENT;
+
+ SELECT * FROM STUDENT;
+/*
+2-07-2024
+*/
+USE SA2019;
+
+SELECT * FROM STUDENT;
+
+-- set data for new column phno DML-update
+
+
+-- SET THE SAFE MODE
+SET SQL_SAFE_UPDATES=0;
+
+UPDATE STUDENT
+SET PHNO=987765545
+WHERE SID=101;
+
+SELECT * FROM STUDENT;
+
+UPDATE STUDENT
+SET PHNO=98877766
+WHERE SNAME='GEETA';
+
+SELECT * FROM STUDENT;
+
+-- uupdate for common adds
+UPDATE STUDENT
+SET PHNO=99999999
+WHERE ADDS='MUMBAI';
+
+SELECT * FROM STUDENT;
+
+-- delete single row from the table-DML -delete
+
+-- delete student whose id=102
+
+DELETE FROM STUDENT
+WHERE SID=102;
+
+SELECT * FROM STUDENT;
+
+INSERT INTO STUDENT(SID,SNAME,ADDS)
+VALUES(106,'KIRAN','PUNE'),
+	(107,'SMITA','MUMBAI'),
+    (108,'GEETA','MUMBAI'),
+    (109,'AKASH','MUMBAI'); -- 4 ROWS AFFECTED
+   -- how to delete multiple rows from the table (based on common data)
+   
+   DELETE FROM STUDENT
+   WHERE SNAME='GEETA';
+   
+    SELECT * FROM STUDENT;
+   --  delete column phno- DDL- alter
+   ALTER TABLE STUDENT
+   DROP PHNO;
+   
+   SELECT * FROM STUDENT;
+   
+   -- delete all rows from the table and structure should remain same-DDL truncate
+    TRUNCATE TABLE STUDENT;
+    SELECT * FROM STUDENT;
+   
+   
+   DESC STUDENT;
+   
+  
+  -- to delete entier table structure from the database -DDL Drop
+  DROP TABLE STUDENT;
+   
+   SHOW TABLES;
+   
+  /*
+  SQL CONSTRAINTS
+  NOT NULL –Null values are not allowed
+	UNIQUE – Duplicate values are not allowed
+ PRIMARY KEY – uniquely identify the each row
+ FOREIGN KEY – establish link between tables
+ CHECK –to apply certain condition
+ DEFAULT- to set default values
+*/
+
+CREATE TABLE EMPLOYEE(EID INT PRIMARY KEY,
+					ENAME VARCHAR(15) NOT NULL,
+                    GENDER CHAR(1),
+                    PHNO INT UNIQUE,
+                    AGE INT CHECK(AGE>=20),
+                    DEPT VARCHAR(10) DEFAULT 'TRAINING',
+                    ADDR VARCHAR(20),
+                    SALARY INT);
+
+-- how to test description of the table
+DESC EMPLOYEE;
+
+--  insert records as per constraint
+
+
+INSERT INTO EMPLOYEE 
+VALUES(101,'AMIT','M',9811111,30,'HR','PUNE',40000);
+
+SELECT * FROM EMPLOYEE;
+
+-- primary key (unique + not null) 
+INSERT INTO EMPLOYEE 
+VALUES(101,'ANITA','F',9811112,30,'HR','PUNE',30000);-- Error Code: 1062. Duplicate entry '101' for key 'PRIMARY'	0.000 sec
+
+INSERT INTO EMPLOYEE 
+VALUES(NULL,'SUNITA','F',9811122,24,'ENGG','MUMBAI',55000);-- Error Code: 1048. Column 'EID' cannot be null	0.000 sec
+
+SELECT * FROM EMPLOYEE;
+
+INSERT INTO EMPLOYEE 
+VALUES(102,'ANITA','F',9811112,30,'HR','PUNE',30000);
+
+-- NOT NULL
+INSERT INTO EMPLOYEE 
+VALUES(101,NULL,'F',9811112,30,'HR','PUNE',30000);-- ENAME CAN NOT BE NULL
+
+SELECT * FROM EMPLOYEE;
+
+
+
+INSERT INTO EMPLOYEE 
+VALUES(103,'SUNITA','F',9811122,24,'ENGG','MUMBAI',55000);
+
+-- UNIQUE (UNIQUE+ NULL VALUES ALLOWED)
+
+SELECT * FROM EMPLOYEE;
+
+INSERT INTO EMPLOYEE 
+VALUES(104,'REKHA','F',9811122,25,'DEV','MUMBAI',65000);-- DUPLICATE ENTRY FOR PHNO
+
+SELECT * FROM EMPLOYEE;
+-- null values allowed 
+INSERT INTO EMPLOYEE 
+VALUES(104,'REKHA','F',NULL,25,'DEV','MUMBAI',65000);
+
+SELECT * FROM EMPLOYEE;
+-- CHECK  constarint is not working check it your side(age>=20)
+INSERT INTO EMPLOYEE 
+VALUES(105,'RAVEENA','F',98134144,19,'QA','PUNE',75000);-- Check constraint 'employee_chk_1' is violated.
+
+
+SELECT * FROM EMPLOYEE;
+
+-- default value (IGNORE THAT COLUMN)
+INSERT INTO EMPLOYEE(EID,ENAME,GENDER,PHNO,AGE,ADDR,SALARY)
+VALUES(106,'KUMAR','M',98134146,29,'PUNE',75000);
+
+DESC EMPLOYEE;
+
+SELECT * FROM EMPLOYEE;
+
+INSERT INTO EMPLOYEE 
+VALUES(110,'KIRAN','F',98124554,35,'DEV','MUMBAI',60000);
+
+/*DISTINCT STATEMET
+ To retrieve unique data from the column we distinct keyword
+ 
+*/
+
+-- DISTINCT GENDERS
+SELECT DISTINCT GENDER FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE;
+
+-- DISTINCT ADDRESS
+SELECT DISTINCT ADDR FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE;
+
+-- DISTINCT DEPT
+SELECT DISTINCT DEPT FROM EMPLOYEE;
+
+-- get the records whose salary is greater than 50000
+SELECT * FROM EMPLOYEE
+WHERE SALARY>50000;
+
+-- get the records whose salary is LESS than 50000
+SELECT * FROM EMPLOYEE
+WHERE SALARY<50000;
+
+-- get the NAME OF EMPLOYEE whose salary is 100000
+
+SELECT ENAME FROM EMPLOYEE
+WHERE SALARY=100000; 
+/*
+AND- TWO CONDITIONS MATCHED
+OR- ANY ONE
+BETWEEN - BETWEEN TWO OR MULTIPLE DATA
+IN - ANYTHING FROM VALUES
+NOT IN- OTHER THAN EXISTING VALUE
+LIMIT- 
+*/
+
+-- AND
+
+SELECT * FROM EMPLOYEE;
+
+--  get the records for all female those are from pune
+
+SELECT * FROM EMPLOYEE
+WHERE GENDER='F' AND ADDR='PUNE';
+
+--  get the records for all MALE those are from PUNE
+SELECT * FROM EMPLOYEE
+WHERE GENDER='M' AND ADDR='PUNE';
+
+SELECT * FROM EMPLOYEE;
+
+-- or
+SELECT * FROM EMPLOYEE
+WHERE GENDER='M' OR ADDR='SATARA';
+
+-- BETWEEN
+
+SELECT * FROM EMPLOYEE;
+
+--  get the records whose salary is between 50000 to 100000
+SELECT * FROM EMPLOYEE
+WHERE SALARY BETWEEN 50000 AND 100000;
+
+--  get the records for age between 20 to 30
+SELECT * FROM EMPLOYEE
+WHERE AGE BETWEEN 20 AND 30;
+
+/*5-07-2024
+IN - ANYTHING FROM VALUES
+NOT IN- OTHER THAN EXISTING VALUE
+LIKE WITH PATTERN
+ORDER BY CLAUSE
+LIMIT- 
+join-
+functions-
+
+*/
+
+USE SA2019;
+
+SELECT * FROM EMPLOYEE;
+
+-- In operator matches values
+-- test for locations Satara,nagpur,delhi
+
+SELECT * FROM EMPLOYEE
+WHERE ADDR IN('DELHI','NAGPUR','SATARA'); -- EMPTY
+
+-- test for locations Satara,nagpur,delhi,PUNE
+SELECT * FROM EMPLOYEE
+WHERE ADDR IN('DELHI','SATARA','NAGPUR','PUNE');
+
+-- NOT IN (EXCEPT VALUES)
+
+--  get all the records only for mumbai not for pune
+SELECT * FROM EMPLOYEE
+WHERE ADDR NOT IN ('PUNE');
+
+-- LIKE OPERATOR(%) * ALL CHAR  _ SINGLE CHAR  % 0 OR MORE (WILDCARD OPERATOR)
+
+SELECT * FROM EMPLOYEE;
+
+-- get the employee name whoes starts with S
+
+SELECT ENAME FROM EMPLOYEE
+WHERE ENAME LIKE 'S%';
+
+
+-- get the employee name whoes name ends with A
+
+	SELECT * FROM EMPLOYEE
+    WHERE ENAME LIKE '%A';
+    
+    
+-- get the address which is macthing 'M_MB_I'
+SELECT * FROM EMPLOYEE
+WHERE ADDR LIKE'M_MB_I';
+
+--  get the all records whoes match with 'A_ _T'
+SELECT * FROM EMPLOYEE
+WHERE ENAME LIKE 'A__t';
+
+/* ORDER BY CLAUSE used to sort the result
+ASC- ascending
+DESC -descending
+*/
+
+SELECT * FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE
+ORDER BY EID DESC;
+
+-- SORT THE RECORDS IN ASCENDING ORDER BASED SALARY
+
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY ASC;
+
+-- LIMIT (AT THE END)
+
+-- get only first 5 records from the table
+
+SELECT * FROM EMPLOYEE; -- 10 RECORDS
+
+SELECT * FROM EMPLOYEE
+LIMIT 5;
+
+--  get the record for higest salary employee
+
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY DESC
+LIMIT 1;
+
+--  get the record for LOWEST salary employee
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY ASC
+LIMIT 1;
+
+-- get 3 records for higest salary 
+ SELECT  * FROM EMPLOYEE
+ ORDER BY SALARY DESC 
+ LIMIT 3;
+
+-- get lowest salary 5 records
+SELECT  * FROM EMPLOYEE
+ ORDER BY SALARY ASC
+ LIMIT 5;
+
+-- LIMIT A,B  -A WILL IGNORE AND NEXT b VALUE YOU WILL ABLE TO RETRIEVE
+
+-- get the second THIRD HIGHEST salary record from the table
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY DESC
+LIMIT 2,1;
+
+-- get last 5 records from the table
+
+SELECT * FROM EMPLOYEE
+LIMIT 5,5;
+
+-- AGGREGATE FUNCTION
+-- TO calculate total records from the table -COUNT
+SELECT COUNT(*) FROM EMPLOYEE;
+-- ALISE - RENAME THE COLUMN FOR TEMPORATORY
+SELECT COUNT(*) AS TOTAL_RECORDS FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY DESC;
+
+-- THIS WILL GIVE YOU FIRST LOWEST AND GHIGHEST SALARY
+SELECT * FROM EMPLOYEE
+WHERE SALARY=100000 OR SALARY=30000
+LIMIT 2;
+
+/*
+SQL JOIN
+-------------------
+TABLES WE CAN JOIN
+
+*/
+
+CREATE TABLE EMP(EID INT,ENAME VARCHAR(15),ADDR VARCHAR(30));
+CREATE TABLE DEPT(DID INT,DNAME VARCHAR(15),HOD VARCHAR(30));
+DESC EMP;
+DESC DEPT;
+
+ALTER TABLE EMP
+ADD DID INT;
+
+INSERT INTO EMP VALUES(107,'ABHI','MUMBAI',118);
+
+SELECT * FROM EMP;
+
+INSERT INTO DEPT VALUES(120,'SRHR','MR.SMITH');
+
+SELECT * FROM DEPT;
+
+-- INNER JOIN (BASED ON EQUALITY BETWEEN TWO TABLE)
+SELECT * FROM EMP
+INNER JOIN DEPT
+ON EMP.DID=DEPT.DID;
+
+SELECT EMP.EID,EMP.ENAME,DEPT.DID,DEPT.DNAME FROM EMP
+INNER JOIN DEPT
+ON EMP.DID=DEPT.DID;
+
+-- LEFT OUTER JOIN(LEFT + COMMON DATA FROM RIGHT TABLE)
+SELECT * FROM EMP;
+
+SELECT * FROM DEPT;
+
+SELECT * FROM EMP 
+LEFT JOIN DEPT
+ON EMP.DID=DEPT.DID;
+
+-- RIGHT OUTER JOIN (RIGHT TABLE + COMMON FROM LEFT TABLE)
+SELECT * FROM EMP 
+RIGHT JOIN DEPT
+ON EMP.DID=DEPT.DID;
+
+-- FULL JOIN (NOT WORKING HERE)
+SELECT * FROM EMP 
+FULL JOIN DEPT;
+
+-- CORRECT  RESULT WITH UNION
+
+SELECT * FROM EMP 
+LEFT JOIN DEPT
+ON EMP.DID=DEPT.DID
+UNION
+SELECT * FROM EMP 
+RIGHT JOIN DEPT
+ON EMP.DID=DEPT.DID;
+
+-- CROSS JOIN
+
+SELECT * FROM EMP 
+CROSS JOIN DEPT;
+
+-- SELF JOIN TABLE JOIN ITSELF
+SELECT E1.EID,E1.ENAME,E2.ENAME,E2.DID
+FROM EMP E1,EMP E2
+WHERE E1.DID=E2.DID;
+
+/*
+SQL FUNCTIONS*/
+
+-- CONVERT()  ONE TYPE DATA WE CAN CONVERT INTO ANOTHER TYPE
+SELECT CONVERT(90,DECIMAL) AS INTTODECIMAL;
+
+SELECT  CONVERT ('2024-07-05',DATE);
+
+SELECT CONVERT (-90,UNSIGNED);
+
+-- MATHS FUNCTION
+SELECT POW(2,3);
+
+SELECT ROUND(99.89);
+
+SELECT ABS(-45.66);
+
+/*
+If the number is less than 0, this function returns -1,
+ If the number is 0 - 0 or greater than 0, this function returns 0.
+*/
+
+SELECT SIGN(-11); -- -1
+SELECT SIGN(11); -- 1
+
+SELECT LEAST(10,20,30,4); 
+
+-- STRING ()
+SELECT LENGTH("HEELO");
+
+SELECT LOWER('HELLO ALL');
+
+SELECT UPPER('hello all ');
+
+SELECT CONCAT('WELCOME','ALL');
+
+SELECT REVERSE("HELLO");
+
+-- TRIM() IGNORE WHITE SPACE BEFORE AND AFTER THE STRING
+SELECT LTRIM('        HI');
+
+SELECT RTRIM('HELLO          ');
+
+-- DATE ()
+SELECT CURDATE();
+
+SELECT SYSDATE();
+
+SELECT CURRENT_DATE();
+
+SELECT DAY('2024-07-05'); -- 5
+
+SELECT DAYNAME('2024-07-05'); -- FRIDAY
+
+SELECT CURTIME();
+
+-- 8-07-2024
+/*
+	AGGREAGATE FUNCTION
+    NORMALIZATION
+    VIEWS
+    TRIGGER
+    CUSTOM FUNCTION
+    CASE EXPRESSION
+    STORED PROCEDURE 
+    SUBQUERY
+*/
+
+	USE SA2019;
+    
+    SHOW TABLES;
+    
+    SELECT * FROM EMPLOYEE;
+    
+    -- get the total enumber of employees
+    SELECT COUNT(*) FROM EMPLOYEE;
+    
+    SELECT COUNT(*) AS TOTALEMPLOYEES FROM EMPLOYEE;
+    
+    -- get the total female employees
+    SELECT COUNT(*) AS FEMALE_EMP FROM EMPLOYEE
+    WHERE GENDER='F';
+
+SELECT * FROM EMPLOYEE;
+
+ -- get the total male employees
+SELECT COUNT(*) AS MALE_EMP FROM EMPLOYEE
+WHERE GENDER='M';
+
+-- get the minimum salary
+SELECT MIN(SALARY) FROM EMPLOYEE;
+
+-- get the mx salary
+SELECT MAX(SALARY) FROM EMPLOYEE;
+
+-- get the avg salary
+SELECT AVG(SALARY) FROM EMPLOYEE;
+
+-- get the total cost 
+SELECT SUM(SALARY) FROM EMPLOYEE;
+
+ -- get minimum salary for female employee
+ SELECT MIN(SALARY) AS FEMALE_SALARY FROM EMPLOYEE
+ WHERE GENDER='F';
+ 
+ SELECT * FROM EMPLOYEE;
+ /*
+ GROUP BY CLAUSE
+ TO GROUP THE RECORDS
+ */
+ 
+ -- get the min salary for Qa department
+ SELECT MIN(SALARY) FROM EMPLOYEE
+ WHERE DEPT='QA';
+ 
+ -- get the min salary as per EVERY department
+SELECT DEPT,MIN(SALARY) FROM EMPLOYEE
+GROUP BY DEPT;
+
+SELECT DEPT,MIN(SALARY) FROM EMPLOYEE
+GROUP BY DEPT;
+
+SELECT * FROM EMPLOYEE;
+
+/*
+ SELECT
+ WHERE
+ GROUP BY
+ HAVING CLAUSE
+ ORDER BY
+ LIMIT
+
+*/
+
+--  get the female emplyee min salary as per department
+SELECT DEPT,MIN(SALARY) FROM EMPLOYEE
+WHERE GENDER='F'
+GROUP BY DEPT;
+
+-- W.A.Query to count number of employee as per department.
+SELECT DEPT,COUNT(*) FROM EMPLOYEE
+GROUP BY DEPT;
+
+-- W.A.Query to count number of employee as per gender
+SELECT GENDER,COUNT(*) FROM EMPLOYEE
+GROUP BY GENDER;
+
+
+-- W.A.Query to count number of employee as per department and gender.
+SELECT DEPT,GENDER,COUNT(*) FROM EMPLOYEE
+GROUP BY DEPT,GENDER;
+
+-- W.A.Query to display min ,max,avg salary of employee
+SELECT MIN(SALARY),MAX(SALARY),AVG(SALARY) FROM EMPLOYEE;
+
+-- .W.A.Query to display min,max,avg salary as per department.
+SELECT DEPT,MIN(SALARY),MAX(SALARY),AVG(SALARY) FROM EMPLOYEE
+GROUP BY DEPT;
+
+-- W. A. Query to Calculate total budget based on department
+SELECT DEPT,SUM(SALARY) FROM EMPLOYEE
+GROUP BY DEPT;
+
+-- W. A. query to get highest salary as per department
+
+SELECT DEPT,MAX(SALARY) FROM EMPLOYEE
+GROUP BY DEPT;
+
+-- w A. QUERY TO get highest 2 last salary as per department
+ SELECT DEPT,MAX(SALARY) FROM EMPLOYEE
+ GROUP BY DEPT,SALARY
+ ORDER BY SALARY DESC
+ LIMIT 1,1;
+ 
+ SELECT * FROM EMPLOYEE;
+ 
+ -- get the employee avg salary as dept
+ SELECT DEPT, AVG(SALARY) FROM EMPLOYEE
+ GROUP BY DEPT;
+  --  get the avg salary as per department and avg salary >50000
+ SELECT DEPT,AVG(SALARY) FROM EMPLOYEE
+ GROUP BY DEPT
+ HAVING AVG(SALARY)>50000;
+ 
+ -- HAVING CLAUSE WE CAN USE TO TEST CONDITION AFTER GROUP BY CLAUSE
+ 
+ /*   =======================*/ 
+ /*
+ Normalization in DBMS
+----------------------------
+Normalization in DBMS is a technique using which you can organize the data 
+in the database tables so that:
+There is less repetition of data,
+A large set of data is structured into a bunch of smaller tables,
+and the tables have a proper relationship between them.
+
+DBMS Normalization is a systematic approach to 
+decompose (break down) tables to eliminate data redundancy(repetition) 
+and undesirable characteristics like Insertion anomaly in DBMS, Update anomaly in DBMS, and Delete anomaly in DBMS.
+
+Types
+===========
+1.first normal form(1NF)
+2.second normal form(2NF)
+3.third normal form (3NF)
+
+1. First Normal Form (1NF)
+-------------------------------
+For a table to be in the First Normal Form, 
+it should follow the following 4 rules:
+1.It should only have single(atomic) valued attributes/columns.
+2.Values stored in a column should be of the same domain.
+3.All the columns in a table should have unique names.
+4.And the order in which data is stored should not matter.
+
+Table student
+==============
+id   name    skills
+--------------------------
+1    Abhi    c/c++
+2    Kiran   java/python
+
+solution
+------------
+student_skills
+--------------------
+id      skills
+------------------
+1	c
+1	c++
+2	java
+2	python
+
+
+student
+===========
+id   name
+1    Abhi
+2    Kiran
+
+2. Second Normal Form (2NF)
+---------------------------------
+For a table to be in the Second Normal Form,
+1.It should be in the First Normal form.
+2.And, it should not have Partial Dependency.
+
+What is Partial Dependency?
+-------------------------------
+When a table has a primary key that is made up of two or more columns,
+ then all the columns(not included in the primary key) in that table 
+ should depend on the entire primary key and not on a part of it. 
+If any column(which is not in the primary key) depends on
+ a part of the primary key then we say we have Partial dependency in the table.
+
+student table
+=============
+id    name   branch
+--------------------
+1     Kiran    Cs
+2     Seema    mech
+
+subject
+============
+subid    name    
+1	c
+2	c++
+
+score table
+=============
+id   subid    marks   teacher
+--------------------------------
+1     1          50      Priyanka
+
+2     2          40      Sarang
+
+
+teacher info is depends on subject id not student id 
+
+solution
+=============
+subject table
+============
+subid   name    teacher
+------------------------
+1	c	Priyanka
+2	c++ 	Sarang
+
+score
+======
+id  subid   marks
+------------------
+1	1	50
+2	2	40
+
+3. Third Normal Form (3NF)
+----------------------------------
+A table is said to be in the Third Normal Form when,
+1.It satisfies the First Normal Form and the Second Normal form.
+2.And, it doesn't have Transitive Dependency.
+
+A------------>B--------------->C
+	
+
+then A----------->c
+A is transitive dependent on C
+
+student
+=============
+sid   	name   subid   subname    add
+------------------------------------------
+1	Amar	101     c       pune
+2       seema   102     c++     Mumbai
+3       Radha   103    java     pune
+
+
+here student id depends on subject id and subject id depends on subject name
+then student id transitive dependent on subject name
+
+student
+======
+sid   	name   subid     add
+------------------------------------------
+1	Amar	101      pune
+2       seema   102      Mumbai
+3       Radha   103      pune
+
+
+subid  subname
+--------------
+101	C
+102     c++
+103     java
+
+ 
+ */
+ 
+-- FOREIGN KEY
+SHOW TABLES;
+
+DESC EMP;
+
+-- ADD PRIMARY KEY CONSTRAINT TO EMP TABLE
+ALTER TABLE EMP
+ADD PRIMARY KEY(EID);
+DESC EMP;
+
+CREATE TABLE PROJECT(PID INT,PNAME VARCHAR(15),EID INT,
+					PRIMARY KEY(PID),FOREIGN KEY(EID) REFERENCES EMP(EID));
+                    DESC PROJECT;
+                    
+   SELECT * FROM EMP;
+   
+   INSERT INTO PROJECT VALUES(3,'PROJECT3',106);
+   
+   SELECT * FROM PROJECT;
+   
+   -- HOW TO JOIN TWO TABLE WITHOUT JOIN -->USING KEYS IT IS POSSIBLE
+   SELECT * FROM EMP,PROJECT
+   WHERE EMP.EID=PROJECT.EID;
+
+ SELECT * FROM EMP,PROJECT
+   WHERE (EMP.EID=102 AND PROJECT.EID=102);
+   
+   
+   SELECT EID FROM project;
+   
+/*
+VIEWS
+IT IS USED TO CREATE ABSTRACT VIEW OF ORIGINAL TABLE
+CREATE [OR REPLACE] VIEW view_name AS    
+SELECT columns    
+FROM tables    
+[WHERE conditions]; 
+*/
+
+SELECT * FROM EMPLOYEE;
+
+CREATE VIEW EMPDATA AS 
+SELECT EID,ENAME,DEPT
+FROM EMPLOYEE;
+
+SELECT * FROM EMPDATA;
+-- UPDATE AMITS FOR EMPLOYEE
+
+SET SQL_SAFE_UPDATES=0;
+
+UPDATE EMPLOYEE
+SET ENAME='AMITS'
+WHERE EID=101;
+
+SELECT * FROM EMPLOYEE;
+SELECT * FROM EMPDATA;
+
+
+/*
+ADD CONSTRAINT AND DROP CONSTRAINT*/
+DESC DEPT;
+
+-- ADD UNIQUE KEY
+ALTER TABLE DEPT
+ADD UNIQUE KEY(DNAME);
+
+DESC DEPT;
+
+-- DROP THE CONSTRAINT
+-- TO REMOVE UNIQUE KEY CONSTRAINT
+ALTER TABLE DEPT
+DROP INDEX DNAME;
+
+ALTER TABLE DEPT
+ADD PRIMARY KEY(DID);
+
+DESC DEPT;
+
+ALTER TABLE DEPT
+DROP PRIMARY KEY;
+
+DESC DEPT;
+
+/*
+Custom Function
+=====================
+Function 
+===============
+Syntax:
+=============
+delimiter $$
+create function fun_Name(parameter type)
+returns type
+begin
+delcare;
+return ;
+end $$
+delimiter ;
+
+To call function in mysql
+-----------------------------
+select fun_Name() \g
+
+
+*/
+
+
+
+delimiter $$
+create function testcube(NUM INT)
+returns INT
+begin
+declare total int;
+set total=num*num*num;
+return total;
+end $$
+delimiter ;
+
+-- call function 
+select testcube(10);
+
+
+
