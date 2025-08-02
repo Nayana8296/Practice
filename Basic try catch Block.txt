@@ -1,0 +1,18 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.Arrays;
+class Main {
+    public static void main(String[] args) {
+        try{
+            int [] arr ={0,1,2};
+            System.out.println(arr[5]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+         System.out.println("Array Index cannot be greater than 5");
+         
+         
+                 }
+    }
+}
+
+        

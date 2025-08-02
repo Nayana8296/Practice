@@ -1,0 +1,61 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Home {
+    private String kitchen;
+    private int rooms;
+    private int windows;
+    private int year;
+    
+    public String getKitchen() {
+        return kitchen;
+    }
+    public int getRooms() {
+        return rooms;
+    }
+    public int getWindows(){
+        return windows;
+    }
+    public int getYear(){
+        return year;
+    }
+     public void setKitchen(String kitchen){
+        this.kitchen = kitchen;
+    }
+     public void setRooms(int rooms){
+      this.rooms = rooms;
+     }
+     public void setWindows(int windows){
+         this.windows=windows;
+     }
+     public void setYear(int year) {
+         if(year>2003){
+         this.year=year;
+     }
+     else{
+    System.out.println("This year is not valid");
+     }
+     }
+    public static void main(String[] args) {
+        Home H = new Home();
+        H.setKitchen("New Home");
+        H.setRooms(4);
+        H.setWindows(5);
+        H.setYear(2004);
+        
+        
+        System.out.println("Kitchen:"+H.getKitchen());
+        System.out.println("Rooms:"+H.getRooms());
+        System.out.println("Windows:"+H.getWindows());
+        System.out.println("Year:"+H.getYear());
+    }
+    }
+ 
+
+OutPut is:
+Kitchen:New Home
+Rooms:4
+Windows:5
+Year:2004
+
+=== Code Execution Successful ===

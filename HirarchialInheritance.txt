@@ -1,0 +1,32 @@
+class TV {
+    void sound() {
+        System.out.println("TV makes a sound()");
+    }
+}
+
+class Remote extends TV {
+    void buffer() {
+        System.out.println("TV is silent");
+    }
+}  
+
+class Ninja extends TV {
+    void silent () {
+        System.out.println("TV is Buffering");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TV t = new TV();
+        t.sound();
+
+        Remote r = new Remote();
+        r.buffer();
+        r.sound();
+
+        Ninja n = new Ninja();
+        n.silent();
+        n.sound();
+    }
+}
