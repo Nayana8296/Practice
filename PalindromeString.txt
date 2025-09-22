@@ -1,0 +1,31 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a String:");
+        String input=scanner.nextLine();
+        
+        String word = input.toLowerCase().toString();
+        String OriginalWord = word;
+        String reversed = "";
+      
+      for(int i=word.length()-1; i>=0; i--)
+      {
+         reversed = reversed+word.charAt(i); 
+      }
+      System.out.println("reverse :"+reversed);
+      if(OriginalWord.equals(reversed)){
+          System.out.println("Yes it is palindrome");
+      }
+      else{
+          System.out.println("no it is not a palindrome");
+      }
+    }
+}
+
+Output: Enter a String:
+MOM
+reverse :mom
+Yes it is palindrome
