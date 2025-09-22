@@ -1,0 +1,40 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+//package WebDriverDemos;
+
+import java.util.Scanner;
+
+public class CountvowelsConsonants {
+
+	public static void main(String[] args) {
+
+     Scanner scanner = new Scanner(System.in);
+     System.out.println("Enter a String:");
+     String input = scanner.nextLine();
+     String str = "aeiou";
+     String word = input.toLowerCase().toString();
+     
+     int vowels=0; int consonants=0;
+     
+     for(int i=0; i<word.length(); i++) {
+    	 char ch= word.charAt(i);
+    	 
+    	 if(ch=='a'|| ch=='e'|| ch=='i'||ch=='o'||ch=='u') {
+    		
+    		 vowels++;
+    	 }
+    	 else if(ch>='a'&& ch<='z')
+    		 consonants++; 
+    		 }
+    		  System.out.println("Total vowels:"+vowels);
+    		 System.out.println("Total consonats:"+consonants);
+    	 }
+    	 
+     }
+     
+Output:
+Enter a String:
+Nayana
+Total vowels:3
+Total consonats:3
