@@ -158,6 +158,6 @@ test('Let the user select a product and add it to the cart automatically', async
   await clickAndWait(page, page.getByRole('button', { name: 'Back Home' }), 'Back Home');
   await expect(page).toHaveURL(/\/inventory\.html$/);
 
-  console.log('Returned to the product list. Close the browser manually when you are finished.');
-  await page.waitForEvent('close');
+  console.log('Returned to the product list. Closing the browser.');
+  await page.close();
 });
